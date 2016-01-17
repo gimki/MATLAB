@@ -1,0 +1,25 @@
+function []=iterative(L,M,x)
+
+C=productinner(100);
+C=C';
+T=padeqcoefficientinner(L,M,C,x);
+A_1=zeros(M, M);
+C_back=zeros(M,1);
+for a=(L+2):(L+M+1),
+    C_back(a-L-1)=C(1,a);
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+for r=(L+1):(L+M)
+    min_rm=min(r, M);
+    for k=1:min_rm,
+        A_1((r-L),k)=C(1,r-k+1);
+    end
+end
+A_1;
+Q=-A_1\C_back;
+Q
+Dy=-Q\(C_back-Q.*T)
+
+end
+

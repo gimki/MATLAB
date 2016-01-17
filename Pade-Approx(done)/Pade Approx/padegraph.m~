@@ -1,0 +1,11 @@
+function []=padegraph(xstart,xend,M,L)
+C=productinner(100)';
+Q=zeros(10*(xend-xstart)+1,2)
+for x=xstart:0.1:xend,
+    Q(x/0.1+1,1)=x;
+    Q(x/0.1+1,2)=abs(padeinner(L,M,C,x)-(1+x)^0.5)
+
+
+%plotting error between pade approx and actual curve
+end
+
